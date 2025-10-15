@@ -1,6 +1,6 @@
 workflows:
   capacitor_android_release:
-    name: Capacitor Android Build (Debug APK)
+    name: Capacitor Android Debug Build (APK)
     max_build_duration: 60
     environment:
       vars:
@@ -8,25 +8,18 @@ workflows:
     scripts:
       - name: Install dependencies
         script: |
-          echo "📦 Installing dependencies..."
           npm ci || npm install
           npm install -D typescript
           npm install @capacitor/core @capacitor/cli --save
           npm run build || npx vite build
-
       - name: Generate Android project & sync
         script: |
-          echo "⚙️ Generating Android project..."
           npx cap add android || true
           npx cap sync android
-
       - name: Build APK (Debug)
         script: |
-          echo "🏗️ Building debug APK..."
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
-          echo "✅ Build complete!"
-
     artifacts:
       - android/app/build/outputs/apk/debug/*.apk
