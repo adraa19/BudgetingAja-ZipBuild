@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">BudgetingAja</string>
+    <string name="title_activity_main">BudgetingAja</string>
+    <string name="package_name">com.budgeting.aja</string>
+    <string name="custom_url_scheme">com.budgeting.aja</string>
+</resources>

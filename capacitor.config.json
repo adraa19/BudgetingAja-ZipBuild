@@ -1,0 +1,10 @@
+{
+  "appId": "com.budgeting.aja",
+  "appName": "BudgetingAja",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    }
+  }
+}
