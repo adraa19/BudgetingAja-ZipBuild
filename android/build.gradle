@@ -23,20 +23,26 @@ allprojects {
     }
 }
 
-// ✅ Tambahan penting agar Gradle tahu kita pakai Java 17
-tasks.withType(JavaCompile).configureEach {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-    options.encoding = 'UTF-8'
-}
+// ✅ Gunakan gradle task konfigurasi yang benar
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty("android")) {
+            project.android {
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_17
+                    targetCompatibility JavaVersion.VERSION_17
+                }
+            }
 
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-    kotlinOptions {
-        jvmTarget = "17"
+            if (project.plugins.hasPlugin("org.jetbrains.kotlin.android")) {
+                project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+                    kotlinOptions.jvmTarget = "17"
+                }
+            }
+        }
     }
 }
 
-// Bersihkan build
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
