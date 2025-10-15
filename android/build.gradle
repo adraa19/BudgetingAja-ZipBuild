@@ -1,7 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
     repositories {
         google()
         mavenCentral()
@@ -24,6 +23,20 @@ allprojects {
     }
 }
 
+// ✅ Tambahan penting agar Gradle tahu kita pakai Java 17
+tasks.withType(JavaCompile).configureEach {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+// Bersihkan build
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
