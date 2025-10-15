@@ -1,6 +1,6 @@
 workflows:
   capacitor_android_release:
-    name: Capacitor Android Release (ZIP source)
+    name: Capacitor Android Build (Debug mode)
     max_build_duration: 60
     environment:
       vars:
@@ -16,10 +16,10 @@ workflows:
         script: |
           npx cap add android || true
           npx cap sync android
-      - name: Build AAB
+      - name: Build AAB (Debug)
         script: |
           cd android
           chmod +x gradlew
-          ./gradlew bundleRelease
+          ./gradlew bundleDebug
     artifacts:
-      - android/app/build/outputs/bundle/release/*.aab
+      - android/app/build/outputs/bundle/debug/*.aab
